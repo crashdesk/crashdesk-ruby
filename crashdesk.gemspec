@@ -11,7 +11,6 @@ Gem::Specification.new do |gem|
   gem.files =  Dir['lib/**/*'] + Dir['spec/**/*'] + Dir['*.rb'] + ["crashdesk.gemspec"]
   gem.homepage = "http://crashde.sk"
   gem.require_paths = ["lib"]
-  gem.executables << ''
   gem.rubyforge_project = "crashdesk"
   gem.requirements << "json_pure, json-jruby or json gem required"
 end
