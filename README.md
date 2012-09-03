@@ -1,8 +1,7 @@
-crashdesk-ruby
+crashdesk-ruby [![Build Status](https://secure.travis-ci.org/crashdesk/crashdesk-ruby.png?branch=master)](http://travis-ci.org/crashdesk/crashdesk-ruby)
 ==============
 
 Crashde.sk Ruby client library for [Crashde.sk](http://crashde.sk) service
-
 
 How to Install
 --------------
@@ -11,19 +10,19 @@ How to Install
   
     a) Add the `crashdesk` gem to your `Gemfile`
 
-        ```ruby
-        gem "crashdesk"
-        ```
+      ```ruby
+      gem "crashdesk"
+      ```
 
-        ```shell
-        bundle install
-        ```
+      ```shell
+      bundle install
+      ```
 
     b) Install `crashdesk` gem to your system
 
-        ```shell
-        gem install crashdesk
-        ```
+      ```shell
+      gem install crashdesk
+      ```
 
 3.  Copy the configuration to your Ruby project
 
