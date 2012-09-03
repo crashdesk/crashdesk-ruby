@@ -26,7 +26,7 @@ module Crashdesk
     attr_accessor :environment_name, :project_root
 
     def initialize
-      @host                      = 'crashde.sk'
+      @host = 'crashde.sk'
     end
 
     # Hash like access
@@ -40,6 +40,11 @@ module Crashdesk
 
     def protocol
       'http'
+    end
+
+    def reporters
+      reporters = [:remote]
+      reporters << :logger if logger
     end
 
     private

@@ -2,7 +2,7 @@ require 'net/http'
 require 'net/https'
 
 module Crashdesk
-  module Reporter
+  module Reporters
 
     module QueryParams
       def self.encode(value, key = nil)
@@ -11,7 +11,7 @@ module Crashdesk
         when Array then value.map { |v| encode(v, "#{key}[]") }.join('&')
         when nil   then ''
         else
-          "#{key}=#{CGI.escape(value.to_s)}" 
+          "#{key}=#{CGI.escape(value.to_s)}"
         end
       end
 
@@ -53,25 +53,36 @@ module Crashdesk
         end
       end
 
-      def run(data)
+      def run(crashlog)
+        hash = crashlog.to_hash
+        unless hash.respond_to? :to_json
+          require 'json'
+          unless hash.respond_to? :to_json
+            raise StandardError.new("You need a json gem/library installed to send errors to as JSON (Object.to_json not defined).
+                                    \nInstall json_pure, yajl-ruby, json-jruby, or the c-based json gem")
+          end
+        end
+        data = hash.to_json
+
         http = setup_http_connection
         headers = HEADERS.merge('X-Crashdesk-ApiKey' => Crashdesk.configuration.api_key)
 
         response = begin
+                    log "Sending crash report to #{url} with data: #{data}"
                     http.post(url.path, data, headers)
                   rescue *HTTP_ERRORS => e
-                    logger.error "Unable to connect the Creashdesk server. HTTP Error=#{e}"
+                    log "Unable to connect the Creashdesk server. HTTP Error=#{e}", :error
                     nil
                   end
 
         case response
         when Net::HTTPSuccess then
-          logger.info "Success: #{response.class} #{response}"
+          log "Success: #{response.class} #{response}"
         else
-          logger.info "Failure: #{response.class} #{response}"
+          log "Failure: #{response.class} #{response}"
         end
       rescue => e
-        logger.error "Error sending: #{e.class} - #{e.message}\nBacktrace:\n#{e.backtrace.join("\n\t")}"
+        log "Error sending: #{e.class} - #{e.message}\nBacktrace:\n#{e.backtrace.join("\n\t")}", :error
         nil
       end
 
@@ -92,8 +103,8 @@ module Crashdesk
 
       private
 
-      def logger
-        Crashdesk.logger
+      def log(message, severity = :info)
+        Crashdesk.log(message, severity)
       end
 
       def url

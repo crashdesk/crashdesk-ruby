@@ -4,7 +4,7 @@ module Crashdesk
 
     attr_accessor :options, :exception, :backtrace, :environment, :exception_class,
       :exception_message, :context, :occurred_at,
-      :reporter
+      :reporters
 
     def initialize(exception, request, context, options = {})
       self.options = options
@@ -18,16 +18,14 @@ module Crashdesk
       # Environment
       self.environment = Crashdesk::Environment.new(
         :environment_name => options[:environment_name],
-        :project_root => Crashdesk.configure.project_root)
+        :project_root => config.project_root)
 
       # Context
       self.context = context
-      self.occurred_at = Time.now.utc.iso8601
+      self.occured_at = Time.now.utc.iso8601
 
       # How to report?
-      self.reporter = options[:reporter] ||
-        Crashdesk::Reporter::Remote.new(:host => 'localhost',
-                                        :port => 4567) # Need to pass HTTP params
+      self.reporters = options[:reporters] || config.reporters
     end
 
     def to_hash
@@ -35,7 +33,7 @@ module Crashdesk
         :api_key => Crashdesk.configuration.api_key,
         :hash_id => backtrace.hash_id,
         :crc => backtrace.crc,
-        :occurred_at => occurred_at,
+        :occured_at => occured_at,
 
         :environment => environment.to_hash,
 
@@ -48,12 +46,18 @@ module Crashdesk
     end
 
     def report
-      json = Crashdesk::Serializer::Json.new(self.to_hash).process
-      reporter.run(json)
+      report_manager = Crashdesk::ReportManager.new(reporters)
+      report_manager.process(self)
     end
 
     def crc
       session_data.crc
+    end
+
+    private
+
+    def config
+      Crashdesk.configuration
     end
 
   end

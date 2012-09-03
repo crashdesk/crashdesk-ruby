@@ -10,8 +10,9 @@ require 'crashdesk/context_base'
 require 'crashdesk/crashlog'
 require 'crashdesk/backtrace'
 require 'crashdesk/environment'
+require 'crashdesk/report_manager'
 require 'crashdesk/reporters/remote'
-require 'crashdesk/serializers/json'
+require 'crashdesk/reporters/logger'
 
 module Crashdesk
 
@@ -37,8 +38,8 @@ module Crashdesk
       @configuration ||= Configuration.new
     end
 
-    def log(message)
-      configuration.logger.info(LOG_PREFIX + message) if configuration.logger
+    def log(message, severity = :info)
+      configuration.logger.send(severity, LOG_PREFIX + message) if configuration.logger
     end
 
     # Main method how to build crashlog from exception, context, and environment
