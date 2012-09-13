@@ -28,7 +28,7 @@ How to Install
 
     ```ruby
     Crashdesk.configure do |config|
-      config.api_key = "YOUR_API_KEY_HERE"
+      config.app_key = "YOUR_API_KEY"
     end
     ```
 
@@ -40,17 +40,17 @@ settings you need on the `config` block variables. For example:
 
 ```ruby
 Crashdesk.configure do |config|
-  config.api_key = "YOUR_API_KEY_HERE"
+  config.app_key = "YOUR_API_KEY"
   config.use_ssl = true
 end
 ```
 
-###api_key
+###app_key
 
-Your Bugsnag API key (required).
+Your Bugsnag APP key (required).
 
 ```ruby
-config.api_key = "YOUR_API_KEY_HERE"
+config.app_key = "YOUR_API_KEY"
 ```
 
 ###use_ssl
