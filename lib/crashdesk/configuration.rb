@@ -3,7 +3,7 @@ module Crashdesk
   class Configuration
 
     # Basic connection settings
-    attr_accessor :api_key
+    attr_accessor :app_key
 
     # Proxy server
     attr_accessor :proxy_host, :proxy_port, :proxy_user, :proxy_pass
@@ -17,7 +17,7 @@ module Crashdesk
     # Framework is string representing framework
     # @example
     #   Crashdesk.configure do |config|
-    #     config.api_key = 'YOUR API KEY HERE'
+    #     config.app_key = 'YOUR APP KEY HERE'
     #     config.project_root = ::Rails.root
     #     config.environment_name = ::Rails.env
     #     config.logger = ::Rails.logger

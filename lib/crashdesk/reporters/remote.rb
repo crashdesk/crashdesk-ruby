@@ -65,7 +65,7 @@ module Crashdesk
         data = hash.to_json
 
         http = setup_http_connection
-        headers = HEADERS.merge('X-Crashdesk-ApiKey' => Crashdesk.configuration.api_key)
+        headers = HEADERS.merge('X-Crashdesk-AppKey' => Crashdesk.configuration.app_key)
 
         response = begin
                     log "Sending crash report to #{url} with data: #{data}"

@@ -30,7 +30,7 @@ module Crashdesk
 
     def to_hash
       {
-        :api_key => Crashdesk.configuration.api_key,
+        :app_key => Crashdesk.configuration.app_key,
         :hash_id => backtrace.hash_id,
         :crc => backtrace.crc,
         :occured_at => occured_at,

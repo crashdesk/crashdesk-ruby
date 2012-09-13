@@ -8,7 +8,7 @@ module Crashdesk
         if reporter.respond_to? :run
           reporter
         else
-          constantize(reporter).new
+          constantize(reporter).new(host: Crashdesk.configure.host, port: Crashdesk.configure.port)
         end
       end
     end

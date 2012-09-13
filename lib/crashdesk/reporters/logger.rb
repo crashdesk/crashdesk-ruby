@@ -2,6 +2,9 @@ module Crashdesk
   module Reporters
     class Logger
 
+      def initialize(params)
+      end
+
       def run(crashlog)
         require 'pp'
         hash = crashlog.to_hash

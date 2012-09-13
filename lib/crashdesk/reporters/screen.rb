@@ -3,6 +3,9 @@ module Crashdesk
 
     class Screen
 
+      def initialize(params)
+      end
+
       def run(data)
         data.to_json.to_s
       end
