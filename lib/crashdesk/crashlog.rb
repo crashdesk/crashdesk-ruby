@@ -3,7 +3,7 @@ module Crashdesk
   class Crashlog
 
     attr_accessor :options, :exception, :backtrace, :environment, :exception_class,
-      :exception_message, :context, :occurred_at,
+      :exception_message, :context, :occured_at,
       :reporters
 
     def initialize(exception, request, context, options = {})
