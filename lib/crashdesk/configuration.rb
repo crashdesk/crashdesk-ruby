@@ -26,7 +26,7 @@ module Crashdesk
     attr_accessor :environment_name, :project_root
 
     def initialize
-      @host = 'crashde.sk'
+      @host = 'beta.crashde.sk'
     end
 
     # Hash like access
@@ -50,7 +50,7 @@ module Crashdesk
     private
 
     def default_port
-      80
+      9292
     end
 
   end
