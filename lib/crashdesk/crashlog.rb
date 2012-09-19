@@ -51,7 +51,7 @@ module Crashdesk
     end
 
     def crc
-      session_data.crc
+      backtrace.crc
     end
 
     private
