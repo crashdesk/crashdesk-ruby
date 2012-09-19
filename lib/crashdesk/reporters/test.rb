@@ -4,12 +4,13 @@ module Crashdesk
 
       attr_reader :params, :crashlog
 
-      def initialize(params)
+      def initialize(params = nil)
         @params = params
       end
 
       def run(crashlog)
         @crashlog = crashlog
+        @crashlog.to_hash
       end
 
     end

@@ -19,11 +19,12 @@ module Crashdesk
     #   Crashdesk.configure do |config|
     #     config.app_key = 'YOUR APP KEY HERE'
     #     config.project_root = ::Rails.root
-    #     config.environment_name = ::Rails.env
     #     config.logger = ::Rails.logger
     #   end
     #
     attr_accessor :environment_name, :project_root
+
+    attr_accessor :reporters
 
     def initialize
       @host = 'beta.crashde.sk'
@@ -45,6 +46,7 @@ module Crashdesk
     def reporters
       reporters = [:remote]
       reporters << :logger if logger
+      reporters
     end
 
     private

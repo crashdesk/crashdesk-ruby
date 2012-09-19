@@ -13,6 +13,7 @@ require 'crashdesk/environment'
 require 'crashdesk/report_manager'
 require 'crashdesk/reporters/remote'
 require 'crashdesk/reporters/logger'
+require 'crashdesk/reporters/stderr'
 
 module Crashdesk
 

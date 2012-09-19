@@ -2,7 +2,7 @@ module Crashdesk
   module Reporters
     class Stderr
 
-      def initialize(params)
+      def initialize(params = nil)
         $stderr.puts "Stderr initialized with: #{params}"
       end
 

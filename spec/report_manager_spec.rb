@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'crashdesk/reporters/test'
 
 describe Crashdesk::ReportManager do
 
@@ -9,11 +10,6 @@ describe Crashdesk::ReportManager do
                             {:name => 1, :string => 2}
                           end
                        end
-      class ::Crashdesk::Reporters::Echo
-        def run(crashlog)
-          crashlog.to_hash
-        end
-      end
     end
 
     before do
@@ -28,13 +24,13 @@ describe Crashdesk::ReportManager do
     end
 
     it "and with Foo logger should return echo and also with logger call PP" do
-      @report_manager = Crashdesk::ReportManager.new([:logger, :echo])
+      @report_manager = Crashdesk::ReportManager.new([:logger, :test])
       PP.should_receive(:pp).with(name: 1, string: 2)
       @report_manager.process(@crashlog).should eq([nil, {name:1,string:2}])
     end
 
     it "must accept also constants as argument" do
-      @report_manager = Crashdesk::ReportManager.new([:logger, ::Crashdesk::Reporters::Echo.new])
+      @report_manager = Crashdesk::ReportManager.new([:logger, ::Crashdesk::Reporters::Test.new])
       PP.should_receive(:pp).with(name: 1, string: 2)
       @report_manager.process(@crashlog).should eq([nil, {name:1,string:2}])
     end

@@ -3,7 +3,7 @@ module Crashdesk
 
     class Screen
 
-      def initialize(params)
+      def initialize(params = nil)
       end
 
       def run(data)

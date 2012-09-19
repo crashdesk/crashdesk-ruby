@@ -8,13 +8,13 @@ describe Crashdesk::Configuration do
     end
 
     it "point to crashdes.sk host" do
-      @config[:host].should == 'crashde.sk'
-      @config.host.should == 'crashde.sk'
+      @config[:host].should == 'beta.crashde.sk'
+      @config.host.should == 'beta.crashde.sk'
     end
 
     it "port is 80" do
-      @config[:port].should == 80
-      @config.port.should == 80
+      @config[:port].should == 9292
+      @config.port.should == 9292
     end
 
     it "protocol is HTTP" do
