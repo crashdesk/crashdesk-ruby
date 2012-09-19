@@ -3,7 +3,7 @@ module Crashdesk
 
     attr_reader :reporters
 
-    def initialize(reporters)
+    def initialize(reporters = [:remote, :logger])
       @reporters = reporters.map do |reporter|
         if reporter.respond_to? :run
           reporter
