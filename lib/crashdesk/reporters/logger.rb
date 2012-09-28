@@ -6,9 +6,8 @@ module Crashdesk
       end
 
       def run(crashlog)
-        require 'pp'
         hash = crashlog.to_hash
-        Crashdesk.log(pp(hash))
+        Crashdesk.log(hash.to_s)
       end
 
     end
